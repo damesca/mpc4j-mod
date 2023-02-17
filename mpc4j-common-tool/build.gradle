@@ -1,0 +1,14 @@
+
+description = ''
+dependencies {
+    compile group: 'com.google.guava', name: 'guava', version:'31.1-jre'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version:'3.9'
+    compile group: 'org.slf4j', name: 'slf4j-api', version:'1.7.26'
+    compile group: 'org.slf4j', name: 'slf4j-log4j12', version:'1.7.26'
+    compile group: 'org.bouncycastle', name: 'bcprov-jdk15on', version:'1.70'
+    compile group: 'cc.redberry', name: 'rings', version:'2.5.5'
+    compile group: 'ch.obermuhlner', name: 'big-math', version:'2.3.0'
+    compile group: 'com.github.haifengl', name: 'smile-math', version:'2.6.0'
+  compile project(':mpc4j-common-jnagmp')
+    testCompile group: 'junit', name: 'junit', version:'4.13.2'
+}

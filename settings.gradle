@@ -1,0 +1,28 @@
+rootProject.name = 'mpc4j'
+include ':mpc4j-common-data'
+include ':mpc4j-common-jnagmp'
+include ':mpc4j-common-rpc'
+include ':mpc4j-common-sampler'
+include ':mpc4j-common-tool'
+include ':mpc4j-crypto-phe'
+include ':mpc4j-dp-cdp'
+include ':mpc4j-dp-ldp'
+include ':mpc4j-s2pc-aby'
+include ':mpc4j-s2pc-pcg'
+include ':mpc4j-s2pc-pir'
+include ':mpc4j-s2pc-pso'
+include ':mpc4j-sml-opboost'
+
+project(':mpc4j-common-data').projectDir = "$rootDir/mpc4j-common-data" as File
+project(':mpc4j-common-jnagmp').projectDir = "$rootDir/mpc4j-common-jnagmp" as File
+project(':mpc4j-common-rpc').projectDir = "$rootDir/mpc4j-common-rpc" as File
+project(':mpc4j-common-sampler').projectDir = "$rootDir/mpc4j-common-sampler" as File
+project(':mpc4j-common-tool').projectDir = "$rootDir/mpc4j-common-tool" as File
+project(':mpc4j-crypto-phe').projectDir = "$rootDir/mpc4j-crypto-phe" as File
+project(':mpc4j-dp-cdp').projectDir = "$rootDir/mpc4j-dp-cdp" as File
+project(':mpc4j-dp-ldp').projectDir = "$rootDir/mpc4j-dp-ldp" as File
+project(':mpc4j-s2pc-aby').projectDir = "$rootDir/mpc4j-s2pc-aby" as File
+project(':mpc4j-s2pc-pcg').projectDir = "$rootDir/mpc4j-s2pc-pcg" as File
+project(':mpc4j-s2pc-pir').projectDir = "$rootDir/mpc4j-s2pc-pir" as File
+project(':mpc4j-s2pc-pso').projectDir = "$rootDir/mpc4j-s2pc-pso" as File
+project(':mpc4j-sml-opboost').projectDir = "$rootDir/mpc4j-sml-opboost" as File

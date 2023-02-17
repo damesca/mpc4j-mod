@@ -1,0 +1,11 @@
+
+description = ''
+dependencies {
+    compile group: 'org.apache.commons', name: 'commons-math3', version:'3.6.1'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version:'3.9'
+    compile group: 'org.slf4j', name: 'slf4j-api', version:'1.7.26'
+    compile group: 'org.slf4j', name: 'slf4j-log4j12', version:'1.7.26'
+    compile group: 'com.google.privacy', name: 'differentialprivacy', version:'1.0.0'
+  compile project(':mpc4j-common-tool')
+    testCompile group: 'junit', name: 'junit', version:'4.13.2'
+}

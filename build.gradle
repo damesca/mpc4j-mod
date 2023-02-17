@@ -1,0 +1,47 @@
+allprojects  {
+  apply plugin: 'maven'
+
+  group = 'edu.alibaba'
+version = '1.0.4'
+}
+
+subprojects {
+  apply plugin: 'java'
+  sourceCompatibility = 8
+  targetCompatibility = 8
+  tasks.withType(JavaCompile) {
+  	options.encoding = 'UTF-8'
+  }
+
+  
+  repositories {
+    mavenLocal()
+    
+    maven { url "https://repo.maven.apache.org/maven2" }
+  }
+
+  dependencies {
+  	implementation 'org.json:json:20180130'
+    implementation 'com.google.guava:guava:31.1-jre'
+    implementation 'org.bouncycastle:bcprov-jdk15on:1.70'
+    testImplementation 'junit:junit:4.13.2'
+    implementation 'org.apache.commons:commons-lang3:3.9'
+    implementation 'commons-io:commons-io:2.6'
+    implementation 'org.slf4j:slf4j-api:1.7.26'
+    implementation 'org.slf4j:slf4j-log4j12:1.7.26'
+    implementation 'org.apache.commons:commons-math3:3.6.1'
+    implementation 'cc.redberry:rings:2.5.5'
+    implementation 'io.netty:netty-all:4.1.48.Final'
+    implementation 'com.google.protobuf:protobuf-java:3.9.0'
+    implementation 'ch.obermuhlner:big-math:2.3.0'
+    implementation 'com.google.privacy:differentialprivacy:1.0.0'
+    implementation 'net.java.dev.jna:jna:5.11.0'
+    implementation 'ml.dmlc:xgboost4j_2.12:1.5.2'
+    implementation 'com.github.haifengl:smile-core:2.6.0'
+    implementation 'com.github.haifengl:smile-math:2.6.0'
+    implementation 'com.github.haifengl:smile-data:2.6.0'
+    implementation 'com.github.haifengl:smile-io:2.6.0'
+    implementation 'org.apache.commons:commons-csv:1.9.0'
+  }
+  
+}
