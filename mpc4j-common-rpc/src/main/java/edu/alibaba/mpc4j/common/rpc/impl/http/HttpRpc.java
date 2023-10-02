@@ -137,17 +137,28 @@ public class HttpRpc implements Rpc {
         }
         jo.put("payload", jsonPayload);
 
+        List<String> ownPartyStr = new ArrayList<String>();
+
         // Add a (recipients, [addr1, ..., addrN]) item in the json
         List<String> recipients = new ArrayList<String>();
         partyIdHashMap.forEach((key, party) -> {
             if(party.getPartyId() != ownParty.getPartyId()) {
                 recipients.add(party.getPartyAddress());
+            }else{
+                ownPartyStr.add(party.getPartyAddress());
             }
         });
         jo.put("recipients", recipients);
 
         /*LOG*/System.out.println("[HttpRpc] send");
         /*LOG*/System.out.println(jo.toString(0));
+
+        /*LOG*/System.out.println("OWN PARTY");
+        partyIdHashMap.forEach((key, party) -> {
+            if(party.getPartyId() == ownParty.getPartyId()) {
+                /*LOG*/System.out.println(party.getPartyAddress());
+            }
+        });
 
         // POST json message to the hardcoded ENDPOINT
         HttpResponse<String> response = postJson(
@@ -171,12 +182,15 @@ public class HttpRpc implements Rpc {
         }
         hexHeader += headerHash;
 
-        i = 64 - response.body().length(); /* TODO: revise */
+        String base64Hash = response.body().substring(8, response.body().length()-2);
+        i = 64 - base64Hash.length(); /* TODO: revise */
         String hexHash = "";
         for(int j = 0; j < i; j++) {
             hexHash += "0";
         }
-        hexHash += response.body();
+        hexHash += base64Hash;
+        /*LOG*/System.out.println("HEXHASH");
+        /*LOG*/System.out.println(hexHash);
 
         String headerLength = "";
         if(hexHeader.length() > 9) {
@@ -210,13 +224,27 @@ public class HttpRpc implements Rpc {
             + hashLength
             + hexHash;
 
+        /*LOG*/System.out.println("ENCODED ABI");
+        /*LOG*/System.out.println(encodedAbi);
+
+        String privateFor = "";
+        for (int j = 0; j < recipients.size(); j++) {
+            privateFor += "\"";
+            privateFor += recipients.get(j);
+            if(j == recipients.size()-1){
+                privateFor += "\"";
+            }else{
+                privateFor += "\",";
+            }
+        }
+
         String messagePassBody = "{\"jsonrpc\":\"2.0\","
             + "\"method\":\"eea_sendTransaction\","
             + "\"params\":[{"
             + "\"from\":" + "\"0xfe3b557e8fb62b89f4916b721be55ceb828dbd73\"" + ","
             + "\"data\":\"" + encodedAbi + "\","
-            + "\"privateFrom\":\"" + "<PRIVATE_FROM>" + "\","
-            + "\"privateFor\":[\"" + "<PRIVATE_FOR>" + "\"],"
+            + "\"privateFrom\":\"" + ownPartyStr.get(0) + "\","
+            + "\"privateFor\":[" + privateFor + "],"
             + "\"restriction\":\"restricted\""
             + "}],"
             + "\"id\":1"
